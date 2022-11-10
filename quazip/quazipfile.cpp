@@ -330,6 +330,9 @@ bool QuaZipFile::open(OpenMode mode, const QuaZipNewInfo& info,
           (int)mode, (int)p->zip->getMode());
       return false;
     }
+
+    auto fromUtf16 = QStringEncoder(QStringEncoder::Utf8);
+
     info_z.tmz_date.tm_year=info.dateTime.date().year();
     info_z.tmz_date.tm_mon=info.dateTime.date().month() - 1;
     info_z.tmz_date.tm_mday=info.dateTime.date().day();
@@ -346,13 +349,13 @@ bool QuaZipFile::open(OpenMode mode, const QuaZipNewInfo& info,
     p->setZipError(zipOpenNewFileInZip4_64(p->zip->getZipFile(),
           p->zip->isUtf8Enabled()
             ? info.name.toUtf8().constData()
-            : p->zip->getFileNameCodec()->fromUnicode(info.name).constData(),
+            : QByteArray(fromUtf16(info.name)).constData(),
           &info_z,
           info.extraLocal.constData(), info.extraLocal.length(),
           info.extraGlobal.constData(), info.extraGlobal.length(),
           p->zip->isUtf8Enabled()
             ? info.comment.toUtf8().constData()
-            : p->zip->getCommentCodec()->fromUnicode(info.comment).constData(),
+            : QByteArray(fromUtf16(info.comment)).constData(),
           method, level, (int)raw,
           windowBits, memLevel, strategy,
           password, (uLong)crc,
