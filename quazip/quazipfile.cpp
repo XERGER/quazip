@@ -25,7 +25,7 @@ quazip/(un)zip.h files for details, basically it's zlib license.
 #include "quazipfile.h"
 
 #include "quazipfileinfo.h"
-
+#include <QStringEncoder>
 using namespace std;
 
 #define QUAZIP_VERSION_MADE_BY 0x1Eu
