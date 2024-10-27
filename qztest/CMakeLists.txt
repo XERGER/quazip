@@ -1,3 +1,7 @@
+if(COMMAND cmake_policy)
+    cmake_policy(SET CMP0111 OLD)
+endif()
+
 set(QZTEST_SOURCES
         qztest.h
         testjlcompress.h

@@ -2,6 +2,10 @@
 cmake_minimum_required(VERSION 3.15...3.18)
 
 project(QuaZip VERSION 1.3)
+# Suppress CMP0111 warnings by setting the policy to OLD
+if(COMMAND cmake_policy)
+    cmake_policy(SET CMP0111 OLD)
+endif()
 
 set(QUAZIP_LIB_VERSION ${QuaZip_VERSION})
 set(QUAZIP_LIB_SOVERSION 1.3.0)

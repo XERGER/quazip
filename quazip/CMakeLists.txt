@@ -1,7 +1,9 @@
 project(QuaZip_Library VERSION ${QUAZIP_LIB_VERSION})
 
 include(GNUInstallDirs) # configurable CMAKE_INSTALL_*DIR
-
+if(COMMAND cmake_policy)
+    cmake_policy(SET CMP0111 OLD)
+endif()
 set(QUAZIP_HEADERS
         JlCompress.h
         ioapi.h
